@@ -11,7 +11,7 @@ import java.io.*;
  *  BKSP -> 
  */
 public class EditableBufferedReader extends BufferedReader {
-	
+
 	public static final int ESCAPE = '\033';
     public static final int ENTER =13;
     public static final int ESC = 27;
