@@ -3,22 +3,17 @@ import java.io.Reader;
 
 public class Line {
     
-    private String line;
+    private StringBuilder line;
     private boolean inputmode; //true = escriure, false = sobreesciure
-	private int pos=1;
+	private int pos=0;
 
     public Line() {
-        line = "";
+        line = new StringBuilder();
         inputmode = true;
     }
 
-   
     public void changeInputMode(){
-        if(inputmode == true){
-            inputmode = false;
-        }else{
-            inputmode = true;
-        }
+        inputmode=!inputmode;
     }
 
     public int getLength(){
@@ -26,50 +21,42 @@ public class Line {
     }
 
     public String getLine(){
-        return line;
+        return line.toString();
     }
 
-    public String escriure(int carac){
+    public String escriure(char carac){
         if (inputmode) {
             if(pos==line.length()+1){
-                StringBuilder sb = new StringBuilder(line);
-                sb.append((char)carac); 
-                line = sb.toString();
+                line.append(carac); 
             }else{
-                StringBuilder sb = new StringBuilder(line);
-            sb.insert(pos, (char)carac); 
-            line = sb.toString(); 
+                line.insert(pos, carac); 
             }
-            
         }
-        return line;
+        return line.toString();
     }
     
-    
     public String eliminar(){
-        
-
-        return line;
+        return line.toString();
     }
 
     public String borrar(){
-        
-
-        return line;
+        return line.toString();
     }
 
     public void dreta(){
-        if(pos < line.length()){
+        if(pos < line.length())
             pos++;
-        }
     }
     public void esquerra(){
-        if(pos > 0){
+        if(pos > 0)
             pos--;
-        }
     }
 
     public int getPos(){
-        return pos;
+        return pos+1;
+    }
+
+    public void setPos(int pos){
+        this.pos=pos;
     }
 }
