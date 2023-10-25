@@ -27,11 +27,13 @@ public class EditableBufferedReader extends BufferedReader {
     public Reader entrada;
     private Line line;
 	public int valor;
+	Console consola;
 
 	public EditableBufferedReader(Reader entrada){
 		super(entrada);
 		this.line = new Line();
 		setRaw();
+		this.consola = new Console();
 	}
 
 	public void setRaw() {
@@ -106,21 +108,25 @@ public class EditableBufferedReader extends BufferedReader {
 					case ENTER:
 						return line.getLine();
 					case DRETA:
-						System.out.print("\u001b[1C");
+						//System.out.print("\u001b[1C");
+						consola.dreta();
 						line.dreta();
 						break;	
 					case ESQUERRA:
-						System.out.print("\u001b[1D");
+						//System.out.print("\u001b[1D");
+						consola.esquerra();
 						line.esquerra();
 						break;	
 					case FIN:
 						line.getLength();
 						line.setPos(line.getLength());
-						System.out.print("\u001b[" + (line.getLength() + 1) + "G");
+						consola.fin(line.getLength()+1);
+						//System.out.print("\u001b[" + (line.getLength() + 1) + "G");
 						break;
 					case INICI:
 						line.setPos(0);
-                	  	System.out.print("\u001b[1G"); 
+                	  	//System.out.print("\u001b[1G"); 
+						consola.inici();
 						break;
 					case INSERTAR:
 						line.changeInputMode();
@@ -128,23 +134,26 @@ public class EditableBufferedReader extends BufferedReader {
 					case BORRAR: //backspace
 						if(line.getPos() > 1) {
 							line.borrar();
-							System.out.print("\033[D");
-							System.out.print("\033[P");
+							consola.borrar();
+							//System.out.print("\033[D");
+							//System.out.print("\033[P");
 						}
 						break;
 					case ELIMINAR: //delete
 						if(line.getPos() > 0) {
-							System.out.print("\033[P");
+							consola.eliminar();
+							//System.out.print("\033[P");
 							line.eliminar();
 						}
 						break;
 					default:
 						line.escriure((char)carac);
 						line.dreta();
-						System.out.print("\u001b[2J");
-						System.out.print("\033[2K\033[1G");
-						System.out.print(line.getLine());	
-						System.out.print("\033[" + line.getPos() + "G");
+						consola.dflt(line.getLine(), line.getPos());
+						//System.out.print("\u001b[2J");
+						//System.out.print("\033[2K\033[1G");
+						//System.out.print(line.getLine());	
+						//System.out.print("\033[" + line.getPos() + "G");
 						break;
 					}
 			}
