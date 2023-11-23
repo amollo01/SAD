@@ -1,0 +1,21 @@
+#music-player {
+    width: 300px;
+    margin: auto;
+    text-align: center;
+}
+
+#song-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#song-list li {
+    cursor: pointer;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+}
+
+#song-list li:hover {
+    background-color: #f0f0f0;
+}

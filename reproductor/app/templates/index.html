@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reproductor de Música</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div id="music-player">
+        <h1>Reproductor de Música</h1>
+        <audio id="audio-player" controls></audio>
+              
+    </div>
+    
+    <div>
+        <input type="text" id="search-box" placeholder="Buscar canço...">
+    </div>
+
+    <ul id="song-list"></ul>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+    <div>
+        <ul id="song-list"></ul>
+    </div>
+    
+</body>
+</html>
+  
