@@ -1,28 +1,30 @@
 document.addEventListener('DOMContentLoaded', function () {
     
-    var reproductorAudio = document.getElementById('audio-player');
-    var llistaSongs = document.getElementById('song-list');
-    var busqueda = document.getElementById('search-box');
+    var reproductorAudio = document.getElementById('reproductor_musica');
+    var llistaMusica = document.getElementById('llista_musica');
+    var busqueda = document.getElementById('barra_busqueda');
 
-    function updateSongList (songs) {
+    function actulitzaLlista (songs) {
 
-        llistaSongs.innerHTML = '';
+        llistaMusica.innerHTML = '';
 
         // afegim les cançons a la llista
-        for (var i = 0; i < songs.length; i++) { 
-            var song = songs[i];
+        for (var i = 0; i < songs.length; i++) {
+            (function () {
+                var song = songs[i];
         
-            //si el nom de la canço conte el text del buscador la mostrem
-            if (song.toLowerCase().includes(busqueda.value.toLowerCase())) {
-                var elementLlista = document.createElement('li');
-                elementLlista.textContent = song;
-                elementLlista.onclick = function () {
-                    //repodruim la canço seleccionada
-                    reproductorAudio.src = '/static/songs/' + song;
-                    reproductorAudio.play();
-                };
-                llistaSongs.appendChild(elementLlista);
-            }
+                // Mostrem les cançons que el seu nom coincideix amb l'escrtit al bucador
+                if (song.toLowerCase().includes(busqueda.value.toLowerCase())) {
+                    var elementLlista = document.createElement('li');
+                    elementLlista.textContent = song;
+                    elementLlista.onclick = function () {
+                        // Reproducim la canço
+                        reproductorAudio.src = '/static/songs/' + song;
+                        reproductorAudio.play();
+                    };
+                    llistaMusica.appendChild(elementLlista);
+                }
+            })();
         }
     }
 
@@ -32,11 +34,10 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.json();
         })
         .then(function(songs) {
-            //actualiza la lista al escriure en el buscador
+            //actualiza la lista al pujar un nova canço 
             busqueda.addEventListener('input', function() {
-                updateSongList(songs);
+                actulitzaLlista(songs);
             });
-            //actualitzem llista al cargar la pagina
-            updateSongList(songs);
+            actulitzaLlista(songs);
         });
 });

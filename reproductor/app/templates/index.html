@@ -2,28 +2,34 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Reproductor de Música</title>
+    <title>SoundScape</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-
-    <div id="music-player">
-        <h1>Reproductor de Música</h1>
-        <audio id="audio-player" controls></audio>
-              
+    <div id="contenidor_principal">
+        <div id="reproductor">
+            <img id="logo" src="{{ url_for('static', filename='images/logo.jpeg') }}">
+            <div>
+                <audio id="reproductor_musica" controls></audio>
+            </div>
+            <div id="barra">
+                <div id="buscador">
+                    <input type="text" id="barra_busqueda" placeholder="Buscar canço...">
+                </div>
+                <div id="pujar">
+                    <form id="formulari_pujada" action="/upload" method="post" enctype="multipart/form-data">
+                        <label for="pujada" class="icono">
+                            <img src="{{ url_for('static', filename='images/icono_pujada.png') }}">
+                        </label>
+                        <input id="pujada" type="file" name="song" accept="audio/*" onchange="this.form.submit()" style="display: none;"/>
+                    </form>
+                </div>
+            </div>            
+        </div>
+        <div id="contenidor_musica">
+            <ul id="llista_musica"></ul>
+        </div>
     </div>
-    
-    <div>
-        <input type="text" id="search-box" placeholder="Buscar canço...">
-    </div>
-
-    <ul id="song-list"></ul>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    
-    <div>
-        <ul id="song-list"></ul>
-    </div>
-    
 </body>
 </html>
-  
