@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, redirect, url_for
+from flask import Flask, render_template, jsonify, request, redirect
 import os
 from werkzeug.utils import secure_filename
 
@@ -19,24 +19,24 @@ def upload_file():
             return redirect('/')
         file = request.files['song']
         if file.filename == '' or not comprovacio_extensio(file.filename):
-            return redirect('/')
+             return render_template('error.html', message='El arxiu ha de ser de tipus MP3.')
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['CARPETA_PUJAR'], filename))
         return redirect('/')
 
-# Ruta para listar canciones
+# Ruta per llistar cançons
 @app.route('/songs')
 def list_songs():
     directorio = 'app/static/songs'
     llista_musica = []
 
     for archivo in os.listdir(directorio):
-        if archivo.endswith('.mp3'):  # Comprobamos que el archivo sea mp3
+        if archivo.endswith('.mp3'):  
             llista_musica.append(archivo)
 
-    return jsonify(llista_musica)  # Retorna la lista de canciones en formato JSON
+    return jsonify(llista_musica)  # Retorna la lista de cancçons en format JSON
 
-# Ruta para la página principal
+# Ruta per la página principal
 @app.route('/')
 def index():
     return render_template('index.html')

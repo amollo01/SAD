@@ -16,9 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Mostrem les cançons que el seu nom coincideix amb l'escrtit al bucador
                 if (song.toLowerCase().includes(busqueda.value.toLowerCase())) {
                     var elementLlista = document.createElement('li');
-                    elementLlista.textContent = song;
+                    var nomcanco = song.replace(/\.[^/.]+$/, ""); //Eliminar l'extensio de l'arxiu
+                    elementLlista.textContent = nomcanco ;
                     elementLlista.onclick = function () {
-                        // Reproducim la canço
+                        // Reproduim la canço
                         reproductorAudio.src = '/static/songs/' + song;
                         reproductorAudio.play();
                     };
