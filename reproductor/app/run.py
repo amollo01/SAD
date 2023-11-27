@@ -1,6 +1,5 @@
 from flask import Flask, render_template, jsonify, request, redirect
 import os
-from werkzeug.utils import secure_filename
 
 CARPETA_PUJAR= 'app/static/songs'
 
@@ -20,8 +19,7 @@ def upload_file():
         file = request.files['song']
         if file.filename == '' or not comprovacio_extensio(file.filename):
              return render_template('error.html', message='El arxiu ha de ser de tipus MP3.')
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['CARPETA_PUJAR'], filename))
+        file.save(os.path.join(app.config['CARPETA_PUJAR'], file.filename))
         return redirect('/')
 
 # Ruta per llistar cançons
