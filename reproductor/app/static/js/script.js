@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () { //quan la pàgina s'
 
         // afegim les cançons a la llista
         for (var i = 0; i < songs.length; i++) { 
-            (function () { 
+            (function () {  //funció per a que no es sobreescibin les variables (funcio anonima autoinvocada)
                 var song = songs[i];
         
                 // Mostrem les cançons que el seu nom coincideix amb l'escrtit al bucador
