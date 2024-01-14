@@ -10,7 +10,8 @@ La Pràctica 2 es troba dins de la carpeta P2.
 
 Dins de la subcarpeta src, es poden trobar les diferents classes que conformen el programa de la Pràctica 2.
 
-Pràctica 3
+Pràctica 3:
+Es troba dins la carpeta P3. Dins de src es troben les clases de java que conformen el xat de la pràctica amb la interficie gràfica.
 
 
 Projecte Final
